@@ -1,4 +1,6 @@
 ﻿using UnityEditor;
+using UnityEditor.PackageManager;
+using UnityEditor.PackageManager.UI;
 using UnityEditorInternal;
 using UnityEngine;
 
@@ -10,12 +12,6 @@ namespace Pragma.ManifestEditor
         private const string PATH = "Packages/manifest.json";
 
         private static ManifestEditor _rootManifest;
-        
-        // [UnityEditor.Callbacks.DidReloadScripts]
-        // private static void OnScriptsReloaded()
-        // {
-        //     
-        // }
 
         static AutoInjectUrlDependencyToManifest()
         {
@@ -25,28 +21,28 @@ namespace Pragma.ManifestEditor
             AssetDatabase.importPackageCompleted += OnImportPackageCompleted;
             AssetDatabase.importPackageFailed += OnImportPackageFailed;
             AssetDatabase.importPackageCancelled += OnImportPackageCancelled;
-            
+
             Debug.Log("Initialize AutoInjectUrlDependencyToManifest");
         }
-        
+
         private static void OnImportPackageCancelled(string packageName)
         {
             Debug.Log($"Cancelled the import of package: {packageName}");
-            
+
             _rootManifest.Reload();
         }
 
         private static void OnImportPackageCompleted(string packagename)
         {
             Debug.Log($"Imported package: {packagename}");
-            
+
             _rootManifest.Save();
         }
 
         private static void OnImportPackageFailed(string packagename, string errormessage)
         {
             Debug.Log($"Failed importing package: {packagename} with error: {errormessage}");
-            
+
             _rootManifest.Reload();
         }
 
