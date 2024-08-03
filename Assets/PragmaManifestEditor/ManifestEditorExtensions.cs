@@ -33,5 +33,11 @@ namespace Pragma.ManifestEditor
 
             return new ManifestEditor(path);
         }
+
+        public static ManifestEditor OpenPackagesManifest()
+        {
+            var path = "Packages/manifest.json";
+            return OpenByPath(path);
+        }
     }
 }

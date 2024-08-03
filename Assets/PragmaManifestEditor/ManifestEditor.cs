@@ -8,6 +8,7 @@ namespace Pragma.ManifestEditor
     public class ManifestEditor
     {
         private const string KEY_DEPENDENCY = "dependencies";
+        private const string KEY_OPTIONAL_DEPENDENCY = "optionalDependencies";
         private const string URL_DEPENDENCY_PREFIX = "https://";
         
         private readonly string _path;
@@ -20,16 +21,27 @@ namespace Pragma.ManifestEditor
             Reload();
         }
 
-        public List<(string, string)> GetDependencies()
+        private string GetDependencyPath(DependencyType dependencyType)
         {
+            return dependencyType switch
+            {
+                DependencyType.Required => KEY_DEPENDENCY,
+                DependencyType.Optional => KEY_OPTIONAL_DEPENDENCY,
+                _ => throw new ArgumentOutOfRangeException(nameof(dependencyType), dependencyType, null)
+            };
+        }
+
+        public List<(string, string)> GetDependencies(DependencyType type)
+        {
+            var path = GetDependencyPath(type);
             var dependencies = new List<(string, string)>();
 
-            if (!_root.HasKey(KEY_DEPENDENCY))
+            if (!_root.HasKey(path))
             {
                 return dependencies;
             }
             
-            var dependenciesObj = _root[KEY_DEPENDENCY].AsObject;
+            var dependenciesObj = _root[path].AsObject;
             
             foreach (var kvp in dependenciesObj)
             {
@@ -39,28 +51,30 @@ namespace Pragma.ManifestEditor
             return dependencies;
         }
 
-        public List<(string, string)>GetUrlDependencies()
+        public List<(string, string)>GetUrlDependencies(DependencyType type)
         {
-            var dependencies = GetDependencies();
+            var dependencies = GetDependencies(type);
 
             dependencies.RemoveAll(dependency => !dependency.Item2.StartsWith(URL_DEPENDENCY_PREFIX));
 
             return dependencies;
         }
 
-        public void AddDependency(ValueTuple<string, string> dependency)
+        public void AddDependency(DependencyType type, ValueTuple<string, string> dependency)
         {
-            AddDependency(dependency.Item1, dependency.Item2);
+            AddDependency(type, dependency.Item1, dependency.Item2);
         }
         
-        public void AddDependency(string key, string value)
+        public void AddDependency(DependencyType type, string key, string value)
         {
-            if (!_root.HasKey(KEY_DEPENDENCY))
+            var path = GetDependencyPath(type);
+            
+            if (!_root.HasKey(path))
             {
-                _root.Add(KEY_DEPENDENCY, new JSONObject());
+                _root.Add(path, new JSONObject());
             }
             
-            var dependencies = _root[KEY_DEPENDENCY].AsObject;
+            var dependencies = _root[path].AsObject;
 
             if (dependencies.HasKey(key))
             {
@@ -70,14 +84,16 @@ namespace Pragma.ManifestEditor
             dependencies.Add(key, new JSONString(value));
         }
         
-        public void RemoveDependency(string key)
+        public void RemoveDependency(DependencyType type, string key)
         {
-            if (!_root.HasKey(KEY_DEPENDENCY))
+            var path = GetDependencyPath(type);
+            
+            if (!_root.HasKey(path))
             {
                 return;
             }
 
-            var dependencies = _root[KEY_DEPENDENCY].AsObject;
+            var dependencies = _root[path].AsObject;
             dependencies.Remove(key);
         }
         
