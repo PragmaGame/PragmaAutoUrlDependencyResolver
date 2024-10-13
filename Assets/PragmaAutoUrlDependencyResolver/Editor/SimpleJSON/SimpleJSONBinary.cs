@@ -42,7 +42,7 @@
 
 using System;
 
-namespace Pragma.ManifestEditor.SimpleJSON
+namespace Pragma.AutoUrlDependencyResolver.SimpleJSON
 {
 #if !SimpleJSON_ExcludeBinary
     public abstract partial class JSONNode

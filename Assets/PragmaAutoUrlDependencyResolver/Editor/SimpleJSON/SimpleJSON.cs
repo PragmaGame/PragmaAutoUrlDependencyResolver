@@ -41,7 +41,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 
-namespace Pragma.ManifestEditor.SimpleJSON
+namespace Pragma.AutoUrlDependencyResolver.SimpleJSON
 {
     public enum JSONNodeType
     {

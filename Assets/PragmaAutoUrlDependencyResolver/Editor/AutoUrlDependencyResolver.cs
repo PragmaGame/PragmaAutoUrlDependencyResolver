@@ -3,12 +3,12 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.PackageManager;
 
-namespace Pragma.ManifestEditor
+namespace Pragma.AutoUrlDependencyResolver
 {
     [InitializeOnLoad]
-    public static class AutoResolverOptionalDependency
+    public static class AutoUrlDependencyResolver
     {
-        static AutoResolverOptionalDependency()
+        static AutoUrlDependencyResolver()
         {
             Events.registeringPackages += OnRegisteringPackage;
             Events.registeredPackages += OnRegisteredPackage;
@@ -25,7 +25,7 @@ namespace Pragma.ManifestEditor
 
             foreach (var packageInfo in args.added)
             {
-                var dependencies = ManifestEditorExtensions.OpenByPath(packageInfo.resolvedPath)
+                var dependencies = DependencyEditorExtensions.OpenByPath(packageInfo.resolvedPath)
                     .GetUrlDependencies(DependencyType.Optional)
                     .Select(x => x.Item2);
                 

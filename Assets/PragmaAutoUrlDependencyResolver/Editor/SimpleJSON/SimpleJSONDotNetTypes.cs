@@ -41,7 +41,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace Pragma.ManifestEditor.SimpleJSON
+namespace Pragma.AutoUrlDependencyResolver.SimpleJSON
 {
     public partial class JSONNode
     {

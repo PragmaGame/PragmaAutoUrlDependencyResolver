@@ -1,0 +1,11 @@
+﻿{
+  "name": "com.pragma.autourldependencyresolver",
+  "displayName": "Pragma AutoUrlDependencyResolver",
+  "version": "1.0.4",
+  "author": {
+    "name": "Pragma",
+    "email": "pragmagame@gmail.com",
+    "url": "https://github.com/PragmaGame"
+  },
+  "license": "MIT"
+}

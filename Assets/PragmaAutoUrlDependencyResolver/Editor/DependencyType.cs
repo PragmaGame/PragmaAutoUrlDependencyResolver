@@ -1,4 +1,4 @@
-﻿namespace Pragma.ManifestEditor
+﻿namespace Pragma.AutoUrlDependencyResolver
 {
     public enum DependencyType
     {

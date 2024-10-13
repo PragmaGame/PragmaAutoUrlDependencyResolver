@@ -1,17 +1,17 @@
 ﻿using System;
 using System.IO;
 
-namespace Pragma.ManifestEditor
+namespace Pragma.AutoUrlDependencyResolver
 {
-    public static class ManifestEditorExtensions
+    public static class DependencyEditorExtensions
     {
-        public static ManifestEditor OpenByName(string name)
+        public static DependencyEditor OpenByName(string name)
         {
             var path = $"Packages/{name}/package.json";
             return OpenByPath(path);
         }
         
-        public static ManifestEditor OpenByPath(string path)
+        public static DependencyEditor OpenByPath(string path)
         {
             var isDirectory = Directory.Exists(path) && !File.Exists(path);
 
@@ -20,7 +20,7 @@ namespace Pragma.ManifestEditor
                 var combinedPath = Path.Combine(path, "package.json");
                 if (File.Exists(combinedPath))
                 {
-                    return new ManifestEditor(combinedPath);
+                    return new DependencyEditor(combinedPath);
                 }
                 
                 throw new Exception($"Given path is a directory {path}");
@@ -31,10 +31,10 @@ namespace Pragma.ManifestEditor
                 throw new Exception($"Package not found! {path}");
             }
 
-            return new ManifestEditor(path);
+            return new DependencyEditor(path);
         }
 
-        public static ManifestEditor OpenPackagesManifest()
+        public static DependencyEditor OpenPackagesManifest()
         {
             var path = "Packages/manifest.json";
             return OpenByPath(path);

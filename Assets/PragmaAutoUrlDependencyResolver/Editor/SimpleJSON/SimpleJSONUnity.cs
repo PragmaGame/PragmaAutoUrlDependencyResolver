@@ -41,7 +41,7 @@
 
 using UnityEngine;
 
-namespace Pragma.ManifestEditor.SimpleJSON
+namespace Pragma.AutoUrlDependencyResolver.SimpleJSON
 {
     public enum JSONContainerType { Array, Object }
 	public partial class JSONNode

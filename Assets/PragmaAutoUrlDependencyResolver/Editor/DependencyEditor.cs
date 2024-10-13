@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Pragma.ManifestEditor.SimpleJSON;
+using Pragma.AutoUrlDependencyResolver.SimpleJSON;
 
-namespace Pragma.ManifestEditor
+namespace Pragma.AutoUrlDependencyResolver
 {
-    public class ManifestEditor
+    public class DependencyEditor
     {
         private const string KEY_DEPENDENCY = "dependencies";
         private const string KEY_OPTIONAL_DEPENDENCY = "optionalDependencies";
@@ -15,7 +15,7 @@ namespace Pragma.ManifestEditor
 
         private JSONObject _root;
 
-        public ManifestEditor(string path)
+        public DependencyEditor(string path)
         {
             _path = path;
             Reload();
