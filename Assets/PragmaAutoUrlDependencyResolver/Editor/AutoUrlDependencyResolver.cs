@@ -25,11 +25,14 @@ namespace Pragma.AutoUrlDependencyResolver
 
             foreach (var packageInfo in args.added)
             {
-                var dependencies = DependencyEditorExtensions.OpenByPath(packageInfo.resolvedPath)
-                    .GetUrlDependencies(DependencyType.Optional)
-                    .Select(x => x.Item2);
+                var dependencyEditor = DependencyEditorExtensions.OpenByPath(packageInfo.resolvedPath);
                 
-                dependenciesPack.AddRange(dependencies);
+                var urlDependencies = dependencyEditor.GetUrlDependencies(DependencyType.Optional)
+                    .Concat(dependencyEditor.GetUrlDependencies(DependencyType.Required))
+                    .Select(x => x.Item2)
+                    .Where(url => !string.IsNullOrEmpty(url));
+
+                dependenciesPack.AddRange(urlDependencies);
             }
             
             if (dependenciesPack.Count > 0)
