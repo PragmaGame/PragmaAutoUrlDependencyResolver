@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 /* * * * *
  * A simple JSON Parser / builder
  * ------------------------------
@@ -1433,3 +1434,4 @@ namespace Pragma.AutoUrlDependencyResolver.SimpleJSON
         }
     }
 }
+#endif

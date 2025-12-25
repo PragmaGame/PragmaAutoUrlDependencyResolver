@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 //#define USE_SharpZipLib
 /* * * * *
  * This is an extension of the SimpleJSON framework to provide methods to
@@ -300,3 +301,4 @@ namespace Pragma.AutoUrlDependencyResolver.SimpleJSON
     }
 #endif
 }
+#endif

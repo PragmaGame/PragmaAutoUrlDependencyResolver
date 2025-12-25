@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Pragma.AutoUrlDependencyResolver.SimpleJSON;
@@ -110,3 +112,5 @@ namespace Pragma.AutoUrlDependencyResolver
         }
     }
 }
+
+#endif

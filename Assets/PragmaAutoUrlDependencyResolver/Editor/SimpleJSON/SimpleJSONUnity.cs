@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 #region License and information
 /* * * * *
  * 
@@ -459,3 +460,5 @@ namespace Pragma.AutoUrlDependencyResolver.SimpleJSON
         #endregion Matrix4x4
     }
 }
+
+#endif

@@ -1,4 +1,5 @@
-﻿#region License and information
+﻿#if UNITY_EDITOR
+#region License and information
 /* * * * *
  * 
  * Extension file for the SimpleJSON framework for better support of some common
@@ -515,3 +516,4 @@ namespace Pragma.AutoUrlDependencyResolver.SimpleJSON
         #endregion NullableTypes
     }
 }
+#endif

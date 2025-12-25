@@ -1,4 +1,6 @@
-﻿namespace Pragma.AutoUrlDependencyResolver
+﻿#if UNITY_EDITOR
+
+namespace Pragma.AutoUrlDependencyResolver
 {
     public enum DependencyType
     {
@@ -6,3 +8,5 @@
         Optional = 2,
     }
 }
+
+#endif
